@@ -1,9 +1,13 @@
 #!/bin/sh
 set -eu
 
+# mkkernel: script de integracao por codigo-fonte (source integration).
+# Use este metodo para kernels NON-GKI / mais antigos, que nao suportam
+# modulo de kernel carregavel (LKM) dinamico: ele cola o driver direto
+# na arvore do kernel antes de voce compilar.
 GKI_ROOT=$(pwd)
-OWNER="KernelSU-Next"
-REPO="$OWNER"
+OWNER="mkhyur"
+REPO="mkkernel"
 
 display_usage() {
     echo "Usage: $0 [--cleanup | <commit-or-tag>]"
@@ -62,6 +66,11 @@ setup_kernelsu() {
     # Add entries in Makefile and Kconfig if not already existing
     grep -q "kernelsu" "$DRIVER_MAKEFILE" || printf "\nobj-\$(CONFIG_KSU) += kernelsu/\n" >> "$DRIVER_MAKEFILE" && echo "[+] Modified Makefile."
     grep -q "source \"drivers/kernelsu/Kconfig\"" "$DRIVER_KCONFIG" || sed -i "/endmenu/i\source \"drivers/kernelsu/Kconfig\"" "$DRIVER_KCONFIG" && echo "[+] Modified Kconfig."
+
+    echo "[i] Agora compile seu kernel normalmente com CONFIG_KSU=y."
+    echo "[i] Para seu manager (com.mkkernel.manager) ser reconhecido, exporte"
+    echo "[i] antes do build: KSU_NEXT_MANAGER_SIZE e KSU_NEXT_MANAGER_HASH"
+    echo "[i] (gerados por scripts/mk-keygen.sh no repositorio do manager)."
     echo '[+] Done.'
 }
 
