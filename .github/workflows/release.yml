@@ -75,6 +75,18 @@ jobs:
       - name: release
         uses: softprops/action-gh-release@v2
         with:
+          name: mkkernel ${{ github.ref_name }}
+          generate_release_notes: true
+          body: |
+            ## mkkernel ${{ github.ref_name }}
+            **Developer: MK** (@mkhyur)
+
+            - `mkkernel-*.apk` (pasta manager): pacote normal `com.mkkernel.manager`
+            - APK em `manager-spoofed`: pacote aleatorio (spoofed)
+            - `*_kernelsu.ko`: modulo de kernel (LKM); AnyKernel3: zips para flash
+            - `ksud-*`: daemon de userspace
+
+            Compile o kernel com o hash da SUA chave (veja README, scripts/mk-keygen.sh).
           files: |
             manager/*.apk
             manager-spoofed/*.apk
