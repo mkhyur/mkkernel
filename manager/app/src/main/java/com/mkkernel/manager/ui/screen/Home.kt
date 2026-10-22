@@ -174,6 +174,10 @@ fun HomeScreen(navigator: DestinationsNavigator) {
                 Natives.isLkmMode
             }
 
+            com.mkkernel.manager.ui.component.UchihaHeader(
+                subtitle = "ROOT  //  KERNEL ${kernelVersion.major}.${kernelVersion.patchLevel}.${kernelVersion.subLevel}"
+            )
+
             StatusCard(
                 kernelVersion,
                 ksuVersion,

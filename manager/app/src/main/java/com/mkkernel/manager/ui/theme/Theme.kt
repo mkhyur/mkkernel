@@ -24,6 +24,34 @@ private val LightColorScheme = lightColorScheme(
     tertiary = SECONDARY_LIGHT
 )
 
+private val UchihaColorScheme = darkColorScheme(
+    primary = CHIDORI_BLUE,
+    onPrimary = UCHIHA_BG,
+    primaryContainer = Color(0xFF0B3A5C),
+    onPrimaryContainer = Color(0xFFCDEBFF),
+    secondary = SUSANOO_PURPLE,
+    onSecondary = Color.White,
+    secondaryContainer = Color(0xFF2A1B5E),
+    onSecondaryContainer = Color(0xFFE4D9FF),
+    tertiary = SHARINGAN_RED,
+    onTertiary = Color.White,
+    tertiaryContainer = Color(0xFF5C0A12),
+    onTertiaryContainer = Color(0xFFFFD9DC),
+    background = UCHIHA_BG,
+    onBackground = UCHIHA_TEXT,
+    surface = UCHIHA_BG,
+    onSurface = UCHIHA_TEXT,
+    surfaceVariant = UCHIHA_SURFACE_HIGH,
+    onSurfaceVariant = Color(0xFFB4BAE6),
+    surfaceContainerLowest = Color(0xFF020309),
+    surfaceContainerLow = Color(0xFF080A1A),
+    surfaceContainer = UCHIHA_SURFACE,
+    surfaceContainerHigh = Color(0xFF121631),
+    surfaceContainerHighest = UCHIHA_SURFACE_HIGH,
+    outline = Color(0xFF4A5099),
+    error = SHARINGAN_RED
+)
+
 fun Color.blend(other: Color, ratio: Float): Color {
     val inverse = 1f - ratio
     return Color(
@@ -40,9 +68,11 @@ fun KernelSUTheme(
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     amoledMode: Boolean = false,
+    uchihaTheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
+        uchihaTheme -> UchihaColorScheme
         amoledMode && darkTheme && dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             val dynamicScheme = dynamicDarkColorScheme(context)
@@ -78,7 +108,7 @@ fun KernelSUTheme(
     }
 
     SystemBarStyle(
-        darkMode = darkTheme
+        darkMode = darkTheme || uchihaTheme
     )
 
     MaterialTheme(
