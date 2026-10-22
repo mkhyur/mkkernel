@@ -17,7 +17,7 @@ jobs:
       contents: write
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
       - name: Rename ksud
         run: |
           mkdir -p ksud
@@ -75,7 +75,7 @@ jobs:
         run: ls -R
 
       - name: release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: mkkernel ${{ github.ref_name }}
           generate_release_notes: false
