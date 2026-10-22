@@ -307,7 +307,7 @@
     <string name="backup_failed">Backup failed</string>
     <string name="restore_success">Restore completed successfully</string>
     <string name="restore_failed">Restore failed</string>
-    <string name="contributors">Contributors</string>
+    <string name="contributors">Desenvolvedor</string>
     <string name="support">Support</string>
     <string name="home_metamodule_status">Metamodule status</string>
     <string name="home_seccomp_status">Seccomp status</string>
